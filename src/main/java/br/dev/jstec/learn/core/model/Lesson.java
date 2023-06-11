@@ -3,7 +3,9 @@ package br.dev.jstec.learn.core.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,6 +39,9 @@ public abstract class Lesson {
             }
             )
     private Set<Enrollment> enrollmentsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "lesson")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public Lesson(Long id, String title, Integer position, Section section) {
         this.id = id;

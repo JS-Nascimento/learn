@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,10 @@ public class Offer {
     @JoinColumn(name = "course_id")
     private Course course;
     @OneToMany(mappedBy = "offer")
-    private List<Resource> resources;
+    private List<Resource> resources = new ArrayList<>();
+
+    @OneToMany(mappedBy = "offer")
+    private List<Topic> topics = new ArrayList<>();
 
     public Offer(Long id, String edition, Instant startMoment, Instant endMoment, Course course) {
         this.id = id;

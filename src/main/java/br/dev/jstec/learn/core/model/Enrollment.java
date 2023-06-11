@@ -8,7 +8,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +30,9 @@ public class Enrollment {
 
     @ManyToMany(mappedBy = "enrollmentsDone")
     private Set<Lesson> lessonDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public Enrollment(User user, Offer offer, Instant enrollMoment, Instant refundMoment, boolean available, boolean onlyUpdate) {
         super();
@@ -84,5 +89,13 @@ public class Enrollment {
 
     public void setOnlyUpdate(boolean onlyUpdate) {
         this.onlyUpdate = onlyUpdate;
+    }
+
+    public Set<Lesson> getLessonDone() {
+        return lessonDone;
+    }
+
+    public List<Deliver> getDeliveries() {
+        return deliveries;
     }
 }
